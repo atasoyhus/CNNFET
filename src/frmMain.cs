@@ -372,7 +372,10 @@ namespace CCNFET
                     j++;
                     m.ReleaseMutex();
                     if (breakLoops)
+                    {
+                        featureSet = null;
                         state.Break();
+                    }
                 });
                 if (!breakLoops && featureSet != null && featureSet.Length > 0)
                     appendLine("Number of features extracted per each instance: " + featureSet[0].Length, "");
