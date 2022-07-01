@@ -240,12 +240,19 @@ namespace CCNFET
                     if (!(layer is Input || layer is Output))
                     {
                         str = "#" + i + "   " + str;
+                        int[] dims = (int[])layer.InputTensorDims.Clone();
+                        if (layer.pad != null)
+                        {
+                            dims[0] -= layer.pad[0] + layer.pad[1];
+                            dims[1] -= layer.pad[2] + layer.pad[3];
+                        }
+                        str += " input:[" + string.Join(", ", dims) + "]";
                         i++;
                     }
                     if (layer is Conv)
                     {
                         int[] dims = ((Conv)layer).weights.Dimensions;
-                        str += " (width,height,channels,filters:[" + string.Join(", ", dims) + "])";
+                        str += " filters:[" + string.Join(", ", dims) + "]";
                         if (dims[0] != 1 && dims[1] != 1)
                             lastConvLayerInd = i - 1;
                     }
@@ -860,29 +867,3 @@ namespace CCNFET
 
     }
 }
-
-/*
- CNNFET (Convolutional Neural Network Feature Extraction Tools) is a standalone Windows application that contains tools to extract features passing images through certain layers of pretrained convolutional neural networks (CNNs). The CNN to be used with this application has to be in a certain format; cenin which is another open source C# implementation of feed forward phase of CNNs. More information about the project 'CeNiN' and cenin files can be found here:
-https://github.com/atasoyhus/CeNiN
-
-PRETRAINED CNNs
-imagenet-matconvnet-vgg-f.cenin (19 layers, 60824256 weights, 232MB)
-https://drive.google.com/file/d/12Z0zkcLFMAvReBYomj1thrU-Aj1EJYKZ/view
-
-imagenet-vgg-verydeep-16.cenin (37 layers, 138344128 weights, 528MB)
-https://drive.google.com/file/d/1t3Z3v1D625fByha19avQpNEiJm1AI-fD/view
-
-
-FEATURE EXTRACTOR
-
-Pretrained CNN model: The model to be used to extract features. You can download one of the pretrained models above or train your own using another tool.
-
-Extractor layer: The last layer that the image will be passed through. The outputs of this layer are considered as features.
-
-Dataset (Images): The directory that contains images. Each folder inside that directory is considered as the class of images it contains.
-
-
-FEATURE SELECTION
-
-
-*/
