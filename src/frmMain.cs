@@ -246,7 +246,7 @@ namespace CCNFET
                             dims[0] -= layer.pad[0] + layer.pad[1];
                             dims[1] -= layer.pad[2] + layer.pad[3];
                         }
-                        str += " input:[" + string.Join(", ", dims) + "]";
+                        str += "   ( input:[" + string.Join(", ", dims) + "]";
                         i++;
                     }
                     if (layer is Conv)
@@ -256,6 +256,7 @@ namespace CCNFET
                         if (dims[0] != 1 && dims[1] != 1)
                             lastConvLayerInd = i - 1;
                     }
+                    str += " )";
                     Invoke(new Action(() => cbLayerList.Items.Add(str)));
                 }
                 if (lastConvLayerInd != -1)
