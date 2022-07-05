@@ -33,8 +33,7 @@ namespace CCNFET
         private int numberOfInstances, numberOfFeatures;
         private int[] orderedIndexes;
 
-        public int[] uniqueLabels;
-        public int classCount;
+        public int[] uniqueLabelIndexes;
 
         public KNNClassifier(float[][] instances, int[] labelIndexes)
         {
@@ -56,16 +55,16 @@ namespace CCNFET
                 if (!uniqueLabelList.Contains(labelIndexes[i]))
                     uniqueLabelList.Add(labelIndexes[i]);
             }
-            uniqueLabels = uniqueLabelList.ToArray();
-            classCount = uniqueLabels.Length;
+            uniqueLabelIndexes = uniqueLabelList.ToArray();
         }
 
         public int classify(float[] newInstance, int k)
         {
             float[] distances = new float[numberOfInstances];
-            float[] minDistancesPerClass = new float[classCount];
-            for (int i = 0; i < classCount; i++)
-                minDistancesPerClass[i] = float.MaxValue;
+            Dictionary<int, float> minDistancesPerClass = new Dictionary<int, float>();
+            int n = uniqueLabelIndexes.Length;
+            for (int i = 0; i < n; i++)
+                minDistancesPerClass[uniqueLabelIndexes[i]] = float.MaxValue;
             for (int i = 0; i < numberOfInstances; i++)
             {
                 float d = calcDistance(instances[i], newInstance);
