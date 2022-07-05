@@ -1,7 +1,7 @@
 # CNNFET
 CNNFET (Convolutional Neural Network Feature Extraction Tools) is a standalone Windows application that utilizes pretrained convolutional neural networks (CNN) for feature extraction. It reads datasets from directories, extract features, sorts them by their relevances, eliminates irrelevant features, classify instances and can export them for further analysis on Matlab or a well-known machine learning tool; Weka. It does not require coding experience or deep knowledge about CNNs and can be used by researchers from various disciplines.
 
-[CNNFET+open_blas_x64.zip (6.59MB)](CNNFET+open_blas_x64.zip)
+[CNNFET+open_blas_x64.zip (6.59MB)](CNNFET%2Bopen_blas_x64.zip)
 
 ![CNNFET main form](cnnfet_main_form.png)
 
