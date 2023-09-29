@@ -48,6 +48,12 @@ namespace CCNFET
         float[][] featureSet;
         Random random;
 
+        private string[] classNamePatterns = new string[]
+        {
+            @".*\\(.*?)\\.*?\..*?$",
+            @".*\\(.*?)_[0-9]{1,}\..*?"
+        };
+
         public unsafe frmMain()
         {
             random = new Random(DateTime.Now.Millisecond);
@@ -277,7 +283,9 @@ namespace CCNFET
         {
             string regexPattern = cbRegex.Text;
             if (cbRegex.SelectedIndex >= 0)
-                regexPattern = regexPattern.Substring(0, regexPattern.IndexOf("$") + 1);
+                regexPattern = classNamePatterns[cbRegex.SelectedIndex];
+            else
+                regexPattern = cbRegex.Text;
             try
             {
                 Regex r = new Regex(regexPattern, RegexOptions.Singleline);

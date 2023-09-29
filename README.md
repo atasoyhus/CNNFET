@@ -20,13 +20,16 @@ CNNFET uses [CeNiN](https://github.com/atasoyhus/CeNiN) to pass images through C
 
 ## Using CNNFET
 ### Organising The Dataset
-CNNFET scans selected directory and inner folders for images that have one of the extensions jpg, jpeg, png or bmp. Names of the folders that contain images are considered as class names.
+CNNFET scans selected directory and inner folders for images that have one of the extensions jpg, jpeg, png or bmp. Class names are extracted from directory names or file names depending on the "Class name pattern" option or the regex pattern that can be written by the user.
 
 ### Feature Extraction
 - Pretrained CNN models in supported formats are listed above. Download one of them and load it
 - Select the convolution layer where passing the image will be stopped and the output will be considered as features. You can visualize filters in the selected layer clicking "Visualize" button.
 - Select the directory that contains folders and images in that folders. If you want to limit the number of images for each class, check "Instance limit per class" and click "Rescan" button.
 - Click "Extract Features" to start the extracting process
+
+### Feature Normalization
+In this tab, features can be normalized to the range [0, 1]. If a seperate test dataset should be normalized using min-max values of a training dataset, minimum and maximum values can be copied and entered manually.
 
 ### Feature Selection
 When this tab is clicked, the features are sorted by the absolute correlation values from high to low. You can skip this tab or you can apply one of these filters:
