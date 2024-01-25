@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.txtLog = new System.Windows.Forms.TextBox();
             this.pnlProgress = new System.Windows.Forms.Panel();
@@ -89,6 +90,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.rtbNormMaxVals = new System.Windows.Forms.RichTextBox();
             this.btnApplyNorm = new System.Windows.Forms.Button();
+            this.tsmExportCorrelations = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsCorrelationsMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pnlProgress.SuspendLayout();
             this.tpHelp.SuspendLayout();
             this.tpClassification.SuspendLayout();
@@ -102,6 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudNofInstanceLimit)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tpNormalization.SuspendLayout();
+            this.cmsCorrelationsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtLog
@@ -175,8 +179,8 @@
             this.tpHelp.Controls.Add(this.rtbHelp);
             this.tpHelp.Location = new System.Drawing.Point(4, 22);
             this.tpHelp.Name = "tpHelp";
-            this.tpHelp.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
-            this.tpHelp.Size = new System.Drawing.Size(803, 135);
+            this.tpHelp.Padding = new System.Windows.Forms.Padding(10);
+            this.tpHelp.Size = new System.Drawing.Size(802, 135);
             this.tpHelp.TabIndex = 4;
             this.tpHelp.Text = "Help";
             // 
@@ -188,7 +192,7 @@
             this.rtbHelp.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.rtbHelp.Location = new System.Drawing.Point(10, 10);
             this.rtbHelp.Name = "rtbHelp";
-            this.rtbHelp.Size = new System.Drawing.Size(783, 115);
+            this.rtbHelp.Size = new System.Drawing.Size(782, 115);
             this.rtbHelp.TabIndex = 1;
             this.rtbHelp.Text = resources.GetString("rtbHelp.Text");
             this.rtbHelp.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.rtbHelp_LinkClicked);
@@ -205,8 +209,8 @@
             this.tpClassification.Controls.Add(this.nudFolds);
             this.tpClassification.Location = new System.Drawing.Point(4, 22);
             this.tpClassification.Name = "tpClassification";
-            this.tpClassification.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tpClassification.Size = new System.Drawing.Size(803, 135);
+            this.tpClassification.Padding = new System.Windows.Forms.Padding(3);
+            this.tpClassification.Size = new System.Drawing.Size(802, 135);
             this.tpClassification.TabIndex = 3;
             this.tpClassification.Text = "Classify";
             this.tpClassification.UseVisualStyleBackColor = true;
@@ -295,7 +299,7 @@
             // nudFolds
             // 
             this.nudFolds.Location = new System.Drawing.Point(93, 15);
-            this.nudFolds.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudFolds.Margin = new System.Windows.Forms.Padding(2);
             this.nudFolds.Maximum = new decimal(new int[] {
             20,
             0,
@@ -322,8 +326,8 @@
             this.tpExport.Controls.Add(this.btnExport);
             this.tpExport.Location = new System.Drawing.Point(4, 22);
             this.tpExport.Name = "tpExport";
-            this.tpExport.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tpExport.Size = new System.Drawing.Size(803, 135);
+            this.tpExport.Padding = new System.Windows.Forms.Padding(3);
+            this.tpExport.Size = new System.Drawing.Size(802, 135);
             this.tpExport.TabIndex = 2;
             this.tpExport.Text = "Export";
             this.tpExport.UseVisualStyleBackColor = true;
@@ -332,7 +336,7 @@
             // 
             this.rbMatlab.AutoSize = true;
             this.rbMatlab.Location = new System.Drawing.Point(13, 44);
-            this.rbMatlab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbMatlab.Margin = new System.Windows.Forms.Padding(2);
             this.rbMatlab.Name = "rbMatlab";
             this.rbMatlab.Size = new System.Drawing.Size(141, 17);
             this.rbMatlab.TabIndex = 27;
@@ -344,7 +348,7 @@
             this.rbWeka.AutoSize = true;
             this.rbWeka.Checked = true;
             this.rbWeka.Location = new System.Drawing.Point(13, 15);
-            this.rbWeka.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbWeka.Margin = new System.Windows.Forms.Padding(2);
             this.rbWeka.Name = "rbWeka";
             this.rbWeka.Size = new System.Drawing.Size(237, 17);
             this.rbWeka.TabIndex = 26;
@@ -373,8 +377,8 @@
             this.tpFeatureSelection.Controls.Add(this.btnApplyFS);
             this.tpFeatureSelection.Location = new System.Drawing.Point(4, 22);
             this.tpFeatureSelection.Name = "tpFeatureSelection";
-            this.tpFeatureSelection.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tpFeatureSelection.Size = new System.Drawing.Size(803, 135);
+            this.tpFeatureSelection.Padding = new System.Windows.Forms.Padding(3);
+            this.tpFeatureSelection.Size = new System.Drawing.Size(802, 135);
             this.tpFeatureSelection.TabIndex = 1;
             this.tpFeatureSelection.Text = "Feature Selection";
             this.tpFeatureSelection.UseVisualStyleBackColor = true;
@@ -404,7 +408,7 @@
             0,
             131072});
             this.nudThreshold.Location = new System.Drawing.Point(178, 44);
-            this.nudThreshold.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudThreshold.Margin = new System.Windows.Forms.Padding(2);
             this.nudThreshold.Maximum = new decimal(new int[] {
             1,
             0,
@@ -418,7 +422,7 @@
             // 
             this.rbThreshold.AutoSize = true;
             this.rbThreshold.Location = new System.Drawing.Point(13, 45);
-            this.rbThreshold.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbThreshold.Margin = new System.Windows.Forms.Padding(2);
             this.rbThreshold.Name = "rbThreshold";
             this.rbThreshold.Size = new System.Drawing.Size(161, 17);
             this.rbThreshold.TabIndex = 25;
@@ -429,7 +433,7 @@
             // 
             this.rbFeatures.AutoSize = true;
             this.rbFeatures.Location = new System.Drawing.Point(13, 73);
-            this.rbFeatures.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbFeatures.Margin = new System.Windows.Forms.Padding(2);
             this.rbFeatures.Name = "rbFeatures";
             this.rbFeatures.Size = new System.Drawing.Size(102, 17);
             this.rbFeatures.TabIndex = 23;
@@ -440,7 +444,7 @@
             // 
             this.rbFeatureCount.AutoSize = true;
             this.rbFeatureCount.Location = new System.Drawing.Point(13, 15);
-            this.rbFeatureCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbFeatureCount.Margin = new System.Windows.Forms.Padding(2);
             this.rbFeatureCount.Name = "rbFeatureCount";
             this.rbFeatureCount.Size = new System.Drawing.Size(152, 17);
             this.rbFeatureCount.TabIndex = 22;
@@ -450,7 +454,7 @@
             // nudFeatureCount
             // 
             this.nudFeatureCount.Location = new System.Drawing.Point(178, 15);
-            this.nudFeatureCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudFeatureCount.Margin = new System.Windows.Forms.Padding(2);
             this.nudFeatureCount.Maximum = new decimal(new int[] {
             2,
             0,
@@ -473,7 +477,7 @@
             // btnApplyFS
             // 
             this.btnApplyFS.Location = new System.Drawing.Point(278, 15);
-            this.btnApplyFS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnApplyFS.Margin = new System.Windows.Forms.Padding(2);
             this.btnApplyFS.Name = "btnApplyFS";
             this.btnApplyFS.Size = new System.Drawing.Size(66, 49);
             this.btnApplyFS.TabIndex = 19;
@@ -489,10 +493,11 @@
             this.lvCorrelations.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.lvCorrelations.ContextMenuStrip = this.cmsCorrelationsMenu;
             this.lvCorrelations.FullRowSelect = true;
             this.lvCorrelations.HideSelection = false;
             this.lvCorrelations.Location = new System.Drawing.Point(374, 201);
-            this.lvCorrelations.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.lvCorrelations.Margin = new System.Windows.Forms.Padding(10);
             this.lvCorrelations.Name = "lvCorrelations";
             this.lvCorrelations.Size = new System.Drawing.Size(200, 79);
             this.lvCorrelations.TabIndex = 20;
@@ -534,7 +539,7 @@
             this.tpMain.Controls.Add(this.btnBrowseCeNiNFile);
             this.tpMain.Location = new System.Drawing.Point(4, 22);
             this.tpMain.Name = "tpMain";
-            this.tpMain.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpMain.Padding = new System.Windows.Forms.Padding(3);
             this.tpMain.Size = new System.Drawing.Size(802, 135);
             this.tpMain.TabIndex = 0;
             this.tpMain.Text = "Feature Extraction";
@@ -643,7 +648,7 @@
             "...\\{CLASSNAME}\\randomfilename.ext",
             "...\\{CLASSNAME}_001.ext"});
             this.cbRegex.Location = new System.Drawing.Point(117, 103);
-            this.cbRegex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbRegex.Margin = new System.Windows.Forms.Padding(2);
             this.cbRegex.Name = "cbRegex";
             this.cbRegex.Size = new System.Drawing.Size(214, 21);
             this.cbRegex.TabIndex = 22;
@@ -667,7 +672,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCeNiNFile.BackColor = System.Drawing.Color.White;
             this.txtCeNiNFile.Location = new System.Drawing.Point(117, 15);
-            this.txtCeNiNFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCeNiNFile.Margin = new System.Windows.Forms.Padding(2);
             this.txtCeNiNFile.Name = "txtCeNiNFile";
             this.txtCeNiNFile.ReadOnly = true;
             this.txtCeNiNFile.Size = new System.Drawing.Size(491, 20);
@@ -679,7 +684,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtImagesPath.BackColor = System.Drawing.Color.White;
             this.txtImagesPath.Location = new System.Drawing.Point(117, 74);
-            this.txtImagesPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtImagesPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtImagesPath.Name = "txtImagesPath";
             this.txtImagesPath.ReadOnly = true;
             this.txtImagesPath.Size = new System.Drawing.Size(491, 20);
@@ -689,7 +694,7 @@
             // 
             this.btnBrowse3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse3.Location = new System.Drawing.Point(684, 13);
-            this.btnBrowse3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBrowse3.Margin = new System.Windows.Forms.Padding(2);
             this.btnBrowse3.Name = "btnBrowse3";
             this.btnBrowse3.Size = new System.Drawing.Size(105, 23);
             this.btnBrowse3.TabIndex = 12;
@@ -721,7 +726,7 @@
             // 
             this.btnExtract.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExtract.Location = new System.Drawing.Point(684, 42);
-            this.btnExtract.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExtract.Margin = new System.Windows.Forms.Padding(2);
             this.btnExtract.Name = "btnExtract";
             this.btnExtract.Size = new System.Drawing.Size(105, 81);
             this.btnExtract.TabIndex = 9;
@@ -769,7 +774,7 @@
             this.cbLayerList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLayerList.FormattingEnabled = true;
             this.cbLayerList.Location = new System.Drawing.Point(117, 44);
-            this.cbLayerList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbLayerList.Margin = new System.Windows.Forms.Padding(2);
             this.cbLayerList.Name = "cbLayerList";
             this.cbLayerList.Size = new System.Drawing.Size(491, 21);
             this.cbLayerList.TabIndex = 17;
@@ -813,8 +818,8 @@
             this.tpNormalization.Controls.Add(this.btnApplyNorm);
             this.tpNormalization.Location = new System.Drawing.Point(4, 22);
             this.tpNormalization.Name = "tpNormalization";
-            this.tpNormalization.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tpNormalization.Size = new System.Drawing.Size(803, 135);
+            this.tpNormalization.Padding = new System.Windows.Forms.Padding(3);
+            this.tpNormalization.Size = new System.Drawing.Size(802, 135);
             this.tpNormalization.TabIndex = 5;
             this.tpNormalization.Text = "Feature Normalization";
             this.tpNormalization.UseVisualStyleBackColor = true;
@@ -824,7 +829,7 @@
             this.rbNormRecalc.AutoSize = true;
             this.rbNormRecalc.Checked = true;
             this.rbNormRecalc.Location = new System.Drawing.Point(15, 14);
-            this.rbNormRecalc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbNormRecalc.Margin = new System.Windows.Forms.Padding(2);
             this.rbNormRecalc.Name = "rbNormRecalc";
             this.rbNormRecalc.Size = new System.Drawing.Size(178, 17);
             this.rbNormRecalc.TabIndex = 34;
@@ -836,7 +841,7 @@
             // 
             this.rbNormPrecalc.AutoSize = true;
             this.rbNormPrecalc.Location = new System.Drawing.Point(15, 40);
-            this.rbNormPrecalc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbNormPrecalc.Margin = new System.Windows.Forms.Padding(2);
             this.rbNormPrecalc.Name = "rbNormPrecalc";
             this.rbNormPrecalc.Size = new System.Drawing.Size(207, 17);
             this.rbNormPrecalc.TabIndex = 33;
@@ -896,13 +901,29 @@
             // btnApplyNorm
             // 
             this.btnApplyNorm.Location = new System.Drawing.Point(230, 14);
-            this.btnApplyNorm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnApplyNorm.Margin = new System.Windows.Forms.Padding(2);
             this.btnApplyNorm.Name = "btnApplyNorm";
             this.btnApplyNorm.Size = new System.Drawing.Size(66, 43);
             this.btnApplyNorm.TabIndex = 28;
             this.btnApplyNorm.Text = "Apply";
             this.btnApplyNorm.UseVisualStyleBackColor = true;
             this.btnApplyNorm.Click += new System.EventHandler(this.btnApplyNorm_Click);
+            // 
+            // tsmExportCorrelations
+            // 
+            this.tsmExportCorrelations.Name = "tsmExportCorrelations";
+            this.tsmExportCorrelations.ShowShortcutKeys = false;
+            this.tsmExportCorrelations.Size = new System.Drawing.Size(180, 22);
+            this.tsmExportCorrelations.Text = "Export all to CSV";
+            this.tsmExportCorrelations.Click += new System.EventHandler(this.tsmExportCorrelations_Click);
+            // 
+            // cmsCorrelationsMenu
+            // 
+            this.cmsCorrelationsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmExportCorrelations});
+            this.cmsCorrelationsMenu.Name = "cmsCorrelationsMenu";
+            this.cmsCorrelationsMenu.ShowImageMargin = false;
+            this.cmsCorrelationsMenu.Size = new System.Drawing.Size(156, 48);
             // 
             // frmMain
             // 
@@ -938,6 +959,7 @@
             this.tabControl.ResumeLayout(false);
             this.tpNormalization.ResumeLayout(false);
             this.tpNormalization.PerformLayout();
+            this.cmsCorrelationsMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1004,6 +1026,8 @@
         private System.Windows.Forms.NumericUpDown nudMinSamplePerClass;
         private System.Windows.Forms.CheckBox cbMinSamplePerClass;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ContextMenuStrip cmsCorrelationsMenu;
+        private System.Windows.Forms.ToolStripMenuItem tsmExportCorrelations;
     }
 }
 

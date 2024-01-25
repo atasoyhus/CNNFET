@@ -53,7 +53,7 @@ namespace CNNFET
 
             float mul = sum_X_avgX_2 * sum_Y_avgY_2;
             if (mul == 0)
-                return 1;
+                return 0;
             else
                 return (float)(sum_X_avgXY_avgY / Math.Sqrt(Math.Abs(mul)));
         }

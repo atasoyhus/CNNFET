@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -247,6 +249,7 @@ namespace CCNFET
                 foreach (Layer layer in cnn.layers)
                 {
                     string str = layer.type;
+                    bool closeBracket = false;
                     if (!(layer is Input || layer is Output))
                     {
                         str = "#" + i + "   " + str;
@@ -257,15 +260,18 @@ namespace CCNFET
                             dims[1] -= layer.pad[2] + layer.pad[3];
                         }
                         str += "   ( input:[" + string.Join(", ", dims) + "]";
+                        closeBracket = true;
                         i++;
                     }
                     if (layer is Conv)
                     {
                         int[] dims = ((Conv)layer).weights.Dimensions;
                         str += " filters:[" + string.Join(", ", dims) + "]";
+                        closeBracket = true;
                         lastConvLayerInd = i - 1;
                     }
-                    str += " )";
+                    if(closeBracket)
+                        str += " )";
                     Invoke(new Action(() => cbLayerList.Items.Add(str)));
                 }
                 if (lastConvLayerInd != -1)
@@ -930,6 +936,31 @@ namespace CCNFET
                 finishedIn();
                 enableTabControl();
             }).Start();
+        }
+
+        private void tsmExportCorrelations_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "CSV file|*.csv";
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+
+            tic();
+            appendLine("Exporting correlations...");
+            showProgressPanel();
+
+            FileStream fileStream = new FileStream(sfd.FileName, FileMode.Create, FileAccess.Write);
+            byte[] byteArray = Encoding.ASCII.GetBytes("Feature Index;Average Absolute Pearson Correlation" + Environment.NewLine);
+            fileStream.Write(byteArray, 0, byteArray.Length);
+            int n = sortedAvgAbsCorrelations.Length;
+            for (var i = 0; i < n; i++)
+            {
+                byteArray = Encoding.ASCII.GetBytes(sortedIndexes[i] + ";" + sortedAvgAbsCorrelations[i] + Environment.NewLine);
+                fileStream.Write(byteArray, 0, byteArray.Length);
+                progress(i, n);
+            }
+            fileStream.Close();
+            finishedIn();
+            enableTabControl();
         }
 
         private void rtbFeatures_DoubleClick(object sender, EventArgs e)
