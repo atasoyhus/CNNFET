@@ -52,7 +52,7 @@ namespace CCNFET
                 Regex r = new Regex(regexPattern, RegexOptions.Singleline);
                 Match m = r.Match(file);
 
-                string c = m.Groups[1].Value;
+                string c = m.Groups[1].Value.Replace("\'", "");
 
                 int ind = classNames.IndexOf(c);
                 if (ind < 0)
