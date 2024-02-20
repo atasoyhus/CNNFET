@@ -60,5 +60,14 @@ namespace CCNFET
 
             return convOutput;
         }
+
+        public int getOutputLength(int layerIndex)
+        {
+            Layer layer = cnn.layers[layerIndex];
+            int n = 0;
+            for (int i = 0; i < layer.outputDims.Length; i++)
+                n *= layer.outputDims[i];
+            return n;
+        }
     }
 }

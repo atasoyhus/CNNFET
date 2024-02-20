@@ -198,7 +198,7 @@ namespace CCNFET
         private void finishedIn()
         {
             if (breakLoops)
-                appendLine("Interrupted by the user after " + round((float)toc(), 3) + " seconds");
+                appendLine("Interrupted after " + round((float)toc(), 3) + " seconds");
             else
                 appendLine("Finished in " + round((float)toc(), 3) + " seconds");
             Invoke(new Action(() => pnlProgress.Visible = false));
@@ -378,7 +378,7 @@ namespace CCNFET
                 return;
             if (dataset is null)
             {
-                MessageBox.Show(this, "Please select a dataset directory.", "Empty Dataset", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, (txtImagesPath.TextLength > 0 ? "Please rescan the dataset directory using a proper class name pattern" : "Please select a dataset directory"), "Empty Dataset", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -401,9 +401,20 @@ namespace CCNFET
                 po.MaxDegreeOfParallelism = Environment.ProcessorCount;
                 Mutex m = new Mutex();
                 int j = 0;
+                bool corruptedFileExists = false;
                 Parallel.For(0, dataset.count, po, (int i, ParallelLoopState state) =>
                 {
-                    featureSet[i] = convOutputExtractor.extract(dataset.files[i], layerIndex);
+                    try
+                    {
+                        featureSet[i] = convOutputExtractor.extract(dataset.files[i], layerIndex);
+                    }
+                    catch
+                    {
+                        breakLoops = true;
+                        appendLine("An error occurred while processing the file '" + dataset.files[i] + "'", "");
+                        corruptedFileExists = true;
+                        dataset = null;
+                    }
                     m.WaitOne();
                     progress(j, n);
                     j++;
@@ -414,8 +425,10 @@ namespace CCNFET
                         state.Break();
                     }
                 });
-                if (!breakLoops && featureSet != null && featureSet.Length > 0)
-                    appendLine("Number of features extracted per each instance: " + featureSet[0].Length, "");
+                if(corruptedFileExists)
+                    appendLine("Please delete any corrupted image file and rescan the dataset directory.");
+                else if (!breakLoops && featureSet != null && featureSet.Length > 0)
+                    appendLine("Number of features extracted per each instance: " + convOutputExtractor.getOutputLength(layerIndex), "");
                 finishedIn();
                 enableTabControl();
             }).Start();
