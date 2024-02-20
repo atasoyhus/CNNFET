@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("CNNFET")]
-[assembly: AssemblyCopyright("Copyright © Huseyin Atasoy 2022")]
+[assembly: AssemblyCopyright("Copyright © Huseyin Atasoy 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
