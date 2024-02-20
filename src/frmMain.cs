@@ -537,6 +537,19 @@ namespace CCNFET
             appendLine(hLine, "");
         }
 
+        string base27chars = "abcdefghijklmnopqrstuvwxvyz";
+        private string toClassAlias(int i)
+        {
+            string alias = "";
+            do
+            {
+                alias = base27chars[i % 27] + alias;
+                i /= 27;
+            }
+            while (i > 0);
+            return alias;
+        }
+
         private void btnClassify_Click(object sender, EventArgs e)
         {
             int foldCount = (int)nudFolds.Value;
@@ -623,28 +636,21 @@ namespace CCNFET
 
                 if (!breakLoops)
                 {
-                    if (dataset.distinctClassCount < 27)
+                    int maxNumberStrLen = dataset.count.ToString().Length;
+
+                    string line = "\r\nCONFUSION MATRIX\r\n";
+                    for (int i = 0; i < dataset.distinctClassCount; i++)
+                        line += leftPad(toClassAlias(i), maxNumberStrLen) + " ";
+                    line += "<-- classified as\r\n";
+                    for (int i = 0; i < dataset.distinctClassCount; i++)
                     {
-                        string chars = "";
-                        for (char c = 'a'; c <= 'z'; c++)
-                            chars += c;
-
-                        int maxNumberStrLen = dataset.count.ToString().Length;
-
-                        string line = "\r\nCONFUSION MATRIX\r\n";
-                        for (int i = 0; i < dataset.distinctClassCount; i++)
-                            line += leftPad(chars.Substring(i, 1), maxNumberStrLen) + " ";
-                        line += "<-- classified as\r\n";
-                        for (int i = 0; i < dataset.distinctClassCount; i++)
+                        for (int j = 0; j < dataset.distinctClassCount; j++)
                         {
-                            for (int j = 0; j < dataset.distinctClassCount; j++)
-                            {
-                                line += leftPad(confusionMatrix[i, j].ToString(), maxNumberStrLen) + " ";
-                            }
-                            line += "| " + chars.Substring(i, 1) + " = " + dataset.distinctClasses[i] + "\r\n";
+                            line += leftPad(confusionMatrix[i, j].ToString(), maxNumberStrLen) + " ";
                         }
-                        appendLine(line, "");
+                        line += "| " + toClassAlias(i) + " = " + dataset.distinctClasses[i] + "\r\n";
                     }
+                    appendLine(line, "");
 
                     appendLine("Accuracy: " + round(100f * (float)tp_tn / total, 6) + "%" + " [" + tp_tn + " / " + total + "]\r\n", "");
                 }
